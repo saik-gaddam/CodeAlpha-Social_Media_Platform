@@ -1,0 +1,21 @@
+:root {
+    --primary: #1d9bf0;
+    --bg: #f7f9f9;
+    --card-bg: #ffffff;
+    --text: #0f1419;
+    --border: #eff3f4;
+}
+
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto; background: var(--bg); margin: 0; color: var(--text); }
+.container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
+.navbar { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 10px 0; position: sticky; top: 0; z-index: 100; }
+.navbar .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.2rem; color: var(--primary); }
+.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; margin-top: 20px; padding: 15px; }
+textarea { width: 100%; border: none; font-size: 1.2rem; outline: none; resize: none; min-height: 80px; }
+.btn-primary { background: var(--primary); color: white; border: none; padding: 8px 20px; border-radius: 999px; font-weight: bold; cursor: pointer; float: right; }
+.avatar { border-radius: 50%; margin-right: 10px; }
+.post-header { display: flex; align-items: center; margin-bottom: 10px; }
+.action-btn { background: none; border: none; color: #536471; cursor: pointer; margin-right: 20px; transition: color 0.2s; }
+.action-btn:hover { color: var(--primary); }
+.like-btn.active { color: #f91880; }
