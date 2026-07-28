@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media App | CodeAlpha</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">CodeAlpha Social</h1>
+            <div class="nav-links">
+                <a href="#"><i class="fas fa-home"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+                <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Post Creation -->
+        <section class="create-post card">
+            <form id="postForm">
+                <textarea placeholder="What's happening?" id="postContent"></textarea>
+                <div class="form-footer">
+                    <button type="button" class="btn-primary" onclick="addPost()">Post</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Feed -->
+        <div id="feed">
+            <!-- Sample Post -->
+            <article class="post card">
+                <div class="post-header">
+                    <img src="https://via.placeholder.com/40" alt="avatar" class="avatar">
+                    <strong>@john_doe</strong>
+                </div>
+                <div class="post-body">
+                    <p>Building my first project for CodeAlpha! 🚀 #FullStack</p>
+                </div>
+                <div class="post-footer">
+                    <button class="action-btn like-btn" onclick="toggleLike(this)">
+                        <i class="far fa-heart"></i> <span>24</span>
+                    </button>
+                    <button class="action-btn comment-btn">
+                        <i class="far fa-comment"></i> <span>5</span>
+                    </button>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
