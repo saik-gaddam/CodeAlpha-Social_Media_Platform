@@ -1,32 +1,32 @@
 /**
- * CodeAlpha Social Media Platform - Feed Interactivity
+ * Gen-Z Crafty Social Feed Interactivity
  */
 
 let posts = [
     {
         id: 1,
-        author: "Sarah Jenkins",
-        avatar: "SJ",
-        time: "2 hours ago",
-        content: "Just launched my brand new web development project using HTML, CSS, and JavaScript! Excited for what's next. 🚀",
-        likes: 12,
+        author: "Zoe Sterling",
+        avatar: "ZS",
+        time: "15m ago",
+        content: "just deployed my vibe check app to production and it didn't even crash once. we taking W's today ✨💻",
+        likes: 42,
         isLiked: false,
         comments: [
-            "Congratulations Sarah! Looks awesome.",
-            "Keep up the great work!"
+            "no bugs? major W fr 🔥",
+            "teach me your ways master"
         ]
     },
     {
         id: 2,
-        author: "Alex Rivera",
-        avatar: "AR",
-        time: "5 hours ago",
-        content: "Coding clean user interfaces is an art form. What are your favorite CSS features to use? 💻✨",
-        likes: 8,
+        author: "Kainat Vlogs",
+        avatar: "KV",
+        time: "3h ago",
+        content: "midnight coding sessions hit different when the lofi playlist is elite. drop your favorite study beats down below 👇🎧",
+        likes: 19,
         isLiked: false,
         comments: [
-            "CSS Grid is definitely a game changer!",
-            "Flexbox all the way."
+            "synthwave radio is the only correct answer",
+            "chilledCow all day everyday"
         ]
     }
 ];
@@ -45,13 +45,13 @@ function renderFeed() {
         const postCard = document.createElement('div');
         postCard.className = 'post-card';
 
-        const commentsHtml = post.comments.map(c => `<div class="comment-item">${c}</div>`).join('');
+        const commentsHtml = post.comments.map(c => `<div class="comment-item">${escapeHtml(c)}</div>`).join('');
 
         postCard.innerHTML = `
             <div class="post-header">
                 <div class="avatar">${post.avatar}</div>
                 <div class="post-author-info">
-                    <h3>${post.author}</h3>
+                    <h3>${escapeHtml(post.author)}</h3>
                     <span>${post.time}</span>
                 </div>
             </div>
@@ -60,18 +60,18 @@ function renderFeed() {
             </div>
             <div class="post-footer-bar">
                 <button class="action-btn ${post.isLiked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
-                    ❤️ <span>${post.likes}</span> Likes
+                    ❤️ <span>${post.likes}</span>
                 </button>
                 <button class="action-btn" onclick="toggleComments(${post.id})">
-                    💬 <span>${post.comments.length}</span> Comments
+                    💬 <span>${post.comments.length}</span>
                 </button>
             </div>
             <div class="comments-section" id="comments-${post.id}">
                 <div class="comment-list">
-                    ${commentsHtml || '<p style="color:var(--text-muted); font-size:0.85rem;">No comments yet. Be the first!</p>'}
+                    ${commentsHtml || '<p style="color:var(--text-muted); font-size:0.85rem;">No comments yet. Start the convo!</p>'}
                 </div>
                 <div class="comment-form">
-                    <input type="text" id="comment-input-${post.id}" placeholder="Write a comment...">
+                    <input type="text" id="comment-input-${post.id}" placeholder="Drop a comment..." onkeypress="handleCommentKey(event, ${post.id})">
                     <button onclick="addComment(${post.id})">Send</button>
                 </div>
             </div>
@@ -85,15 +85,12 @@ function createPost() {
     const input = document.getElementById('post-input');
     const content = input.value.trim();
 
-    if (!content) {
-        alert("Please write something before posting!");
-        return;
-    }
+    if (!content) return;
 
     const newPost = {
         id: Date.now(),
-        author: "Developer User",
-        avatar: "DU",
+        author: "You",
+        avatar: "ME",
         time: "Just now",
         content: content,
         likes: 0,
@@ -138,8 +135,13 @@ function addComment(postId) {
         post.comments.push(commentText);
         input.value = '';
         renderFeed();
-        // Keep comments section open after re-rendering
         document.getElementById(`comments-${postId}`).classList.add('open');
+    }
+}
+
+function handleCommentKey(event, postId) {
+    if (event.key === 'Enter') {
+        addComment(postId);
     }
 }
 
