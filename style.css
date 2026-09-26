@@ -1,18 +1,19 @@
 /* ==========================================
-   CodeAlpha Social Media Platform - UI Design
+   CodeAlpha Gen-Z Social - Crafty Dark Theme
    ========================================== */
 
 :root {
-    --primary: #4f46e5;
-    --primary-dark: #3730a3;
-    --accent: #818cf8;
-    --bg-color: #f1f5f9;
-    --card-bg: #ffffff;
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --border: #e2e8f0;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    --radius: 12px;
+    --bg-deep: #09090b;
+    --surface: #18181b;
+    --surface-hover: #27272a;
+    --neon-pink: #ec4899;
+    --neon-purple: #8b5cf6;
+    --neon-cyan: #06b6d4;
+    --text-main: #f4f4f5;
+    --text-muted: #a1a1aa;
+    --border: #27272a;
+    --radius: 18px;
+    --gradient: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #06b6d4 100%);
 }
 
 * {
@@ -22,67 +23,90 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-deep);
     color: var(--text-main);
-    line-height: 1.5;
+    line-height: 1.6;
+    min-height: 100vh;
 }
 
-/* Navbar */
+/* Glassmorphic Cyber Navbar */
 nav {
-    background: var(--card-bg);
-    padding: 1rem 5%;
+    background: rgba(24, 24, 27, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 7%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: var(--shadow);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
 nav h1 {
-    font-size: 1.4rem;
-    color: var(--primary);
-    font-weight: 800;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
 }
 
-nav .profile-info {
+nav .profile-pill {
+    background: var(--surface-hover);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: var(--text-muted);
-    font-size: 0.95rem;
+    color: var(--neon-cyan);
 }
 
-/* Main Feed Container */
+/* Container */
 .container {
-    max-width: 680px;
-    margin: 2rem auto;
+    max-width: 620px;
+    margin: 2.5rem auto;
     padding: 0 1rem;
 }
 
-/* Create Post Card */
+/* Cyber Create Post Box */
 .create-post-card {
-    background: var(--card-bg);
-    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.create-post-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 3px;
+    background: var(--gradient);
 }
 
 .create-post-card textarea {
     width: 100%;
+    background: var(--bg-deep);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px;
+    border-radius: 12px;
+    padding: 14px;
     font-size: 1rem;
+    color: var(--text-main);
     outline: none;
     resize: none;
     font-family: inherit;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .create-post-card textarea:focus {
-    border-color: var(--primary);
+    border-color: var(--neon-purple);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
 }
 
 .post-actions-bar {
@@ -91,33 +115,37 @@ nav .profile-info {
     margin-top: 1rem;
 }
 
-.btn-primary {
-    background: var(--primary);
+.btn-cyber {
+    background: var(--gradient);
     color: #fff;
     border: none;
     padding: 10px 24px;
-    border-radius: 8px;
-    font-weight: 600;
+    border-radius: 50px;
+    font-weight: 700;
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
+    font-size: 0.95rem;
+    transition: transform 0.2s, opacity 0.2s;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
 }
 
-.btn-primary:hover {
-    background: var(--primary-dark);
+.btn-cyber:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
 }
 
-.btn-primary:active {
-    transform: scale(0.98);
-}
-
-/* Post Card Feed Item */
+/* Post Cards */
 .post-card {
-    background: var(--card-bg);
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
     margin-bottom: 1.5rem;
-    overflow: hidden;
-    animation: fadeIn 0.4s ease-in-out;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    animation: slideUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: transform 0.3s;
+}
+
+.post-card:hover {
+    border-color: #3f3f46;
 }
 
 .post-header {
@@ -128,21 +156,23 @@ nav .profile-info {
 }
 
 .avatar {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--gradient);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    font-size: 1.1rem;
+    font-weight: 800;
+    font-size: 1rem;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
 }
 
 .post-author-info h3 {
     font-size: 1rem;
     color: var(--text-main);
+    font-weight: 700;
 }
 
 .post-author-info span {
@@ -151,18 +181,21 @@ nav .profile-info {
 }
 
 .post-body {
-    padding: 0 1.5rem 1rem;
-    color: var(--text-main);
-    font-size: 1rem;
+    padding: 0 1.5rem 1.2rem;
+    color: #e4e4e7;
+    font-size: 1.05rem;
     word-break: break-word;
 }
 
+/* Footer Interaction Bar */
 .post-footer-bar {
     padding: 0.8rem 1.5rem;
     border-top: 1px solid var(--border);
     display: flex;
     gap: 2rem;
-    background: #fafafa;
+    background: rgba(0,0,0,0.2);
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
 }
 
 .action-btn {
@@ -170,71 +203,105 @@ nav .profile-info {
     border: none;
     color: var(--text-muted);
     font-weight: 600;
+    font-size: 0.95rem;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 6px;
-    transition: color 0.2s;
+    gap: 8px;
+    transition: color 0.2s, transform 0.1s;
 }
 
 .action-btn.liked {
-    color: #e11d48;
+    color: var(--neon-pink);
+}
+
+.action-btn.liked span {
+    animation: bounce 0.3s ease;
 }
 
 .action-btn:hover {
-    color: var(--primary);
+    color: var(--text-main);
 }
 
-/* Comments Section */
+/* Comments Drawer */
 .comments-section {
-    padding: 1rem 1.5rem;
-    background: #f8fafc;
+    padding: 1.2rem 1.5rem;
+    background: var(--bg-deep);
     border-top: 1px solid var(--border);
     display: none;
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
 }
 
 .comments-section.open {
     display: block;
+    animation: fadeIn 0.3s ease;
 }
 
 .comment-list {
     margin-bottom: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .comment-item {
     font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-    background: #fff;
-    padding: 8px 12px;
-    border-radius: 6px;
+    margin-bottom: 0.6rem;
+    background: var(--surface);
+    padding: 10px 14px;
+    border-radius: 10px;
     border: 1px solid var(--border);
+    color: #d4d4d8;
 }
 
 .comment-form {
     display: flex;
-    gap: 8px;
+    gap: 10px;
 }
 
 .comment-form input {
     flex: 1;
-    padding: 8px 12px;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 6px;
+    padding: 10px 14px;
+    border-radius: 50px;
     outline: none;
+    color: var(--text-main);
     font-size: 0.9rem;
 }
 
+.comment-form input:focus {
+    border-color: var(--neon-cyan);
+}
+
 .comment-form button {
-    padding: 8px 16px;
-    background: var(--primary);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
+    background: var(--surface-hover);
+    color: var(--neon-cyan);
+    border: 1px solid var(--border);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-weight: 700;
     cursor: pointer;
+    transition: background 0.2s;
+}
+
+.comment-form button:hover {
+    background: var(--neon-cyan);
+    color: var(--bg-deep);
+}
+
+/* Keyframe Animations */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
 }
