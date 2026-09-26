@@ -3,35 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeAlpha | Social Media Platform</title>
-    <link rel="stylesheet" href="style.css">
+    <title>CodeAlpha | Gen-Z Social Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
     <!-- Navigation -->
     <nav>
         <h1>CodeAlpha Feed</h1>
-        <div class="profile-info">Welcome, Developer</div>
+        <div class="profile-pill">Python Flask Engine 🚀</div>
     </nav>
 
     <!-- Main Container -->
     <div class="container">
         
-        <!-- Create Post Card -->
+        <!-- Create Post Card (Submits to Python Backend) -->
         <div class="create-post-card">
-            <textarea id="post-input" rows="3" placeholder="What's on your mind today?"></textarea>
-            <div class="post-actions-bar">
-                <button class="btn-primary" onclick="createPost()">Post</button>
-            </div>
+            <form action="/post" method="POST">
+                <textarea name="content" rows="3" placeholder="What's on your mind today? ✨" required></textarea>
+                <div class="post-actions-bar">
+                    <button type="submit" class="btn-cyber">Post</button>
+                </div>
+            </form>
         </div>
 
         <!-- Dynamic Post Feed -->
         <div id="feed-container">
-            <!-- Posts will be injected here by JavaScript -->
+            {% for post in posts %}
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="avatar">{{ post.avatar }}</div>
+                    <div class="post-author-info">
+                        <h3>{{ post.author }}</h3>
+                        <span>{{ post.time }}</span>
+                    </div>
+                </div>
+                <div class="post-body">
+                    <p>{{ post.content }}</p>
+                </div>
+                <div class="post-footer-bar">
+                    <!-- Like Form -->
+                    <form action="/like/{{ post.id }}" method="POST" style="display:inline;">
+                        <button type="submit" class="action-btn">
+                            ❤️ <span>{{ post.likes }}</span> Likes
+                        </button>
+                    </form>
+                    
+                    <button class="action-btn" onclick="toggleComments('comments-{{ post.id }}')">
+                        💬 <span>{{ post.comments|length }}</span> Comments
+                    </button>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="comments-section" id="comments-{{ post.id }}">
+                    <div class="comment-list">
+                        {% if post.comments %}
+                            {% for comment in post.comments %}
+                                <div class="comment-item">{{ comment }}</div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="color:var(--text-muted); font-size:0.85rem;">No comments yet. Start the convo!</p>
+                        {% endif %}
+                    </div>
+                    <form action="/comment/{{ post.id }}" method="POST" class="comment-form">
+                        <input type="text" name="comment" placeholder="Drop a comment..." required>
+                        <button type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function toggleComments(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.toggle('open');
+            }
+        }
+    </script>
 </body>
 </html>
